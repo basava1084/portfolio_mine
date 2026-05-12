@@ -13,6 +13,7 @@ import Contact from './components/sections/Contact';
 function App() {
   const { scrollYProgress } = useScroll();
   
+  // Desktop-only transformations (Hidden on mobile via CSS)
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.3], [1, 1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.3], [1, 1.2]);
   const y = useTransform(scrollYProgress, [0, 0.3], [0, -100]);
@@ -24,11 +25,11 @@ function App() {
       
       <Scene />
 
-      {/* 👤 THE ARCHITECT */}
-      <div className="fixed inset-0 z-[5] pointer-events-none flex items-center justify-center">
+      {/* 👤 THE ARCHITECT: ONLY VISIBLE ON DESKTOP (md and up) */}
+      <div className="hidden md:flex fixed inset-0 z-[5] pointer-events-none items-center justify-center">
         <motion.div
           style={{ opacity, scale, y }}
-          className="relative w-[300px] md:w-[450px] aspect-square rounded-full overflow-hidden border-[12px] border-white shadow-[0_30px_100px_rgba(0,0,0,0.1)] bg-white"
+          className="relative w-[450px] aspect-square rounded-full overflow-hidden border-[12px] border-white shadow-[0_30px_100px_rgba(0,0,0,0.1)] bg-white"
         >
           <img 
             src="/me.jpg" 
@@ -40,15 +41,10 @@ function App() {
 
       <main className="relative z-10">
         <div id="home"><Hero /></div>
-        <div className="h-[50vh]" />
         <div id="about"><About /></div>
-        <div className="h-[50vh]" />
         <div id="skills"><Skills /></div>
-        <div className="h-[50vh]" />
         <div id="projects"><Projects /></div>
-        <div className="h-[50vh]" />
         <Storytelling />
-        <div className="h-[50vh]" />
         <div id="contact"><Contact /></div>
       </main>
     </div>

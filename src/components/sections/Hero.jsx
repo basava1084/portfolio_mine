@@ -2,22 +2,13 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 const Hero = () => {
   const { scrollYProgress } = useScroll();
-  
+
   const scale = useTransform(scrollYProgress, [0, 0.2], [1, 2]);
   const rotate = useTransform(scrollYProgress, [0, 0.2], [0, 15]);
   const opacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white py-20 md:py-0">
-      
-      {/* 🔮 MOBILE-ONLY IMAGE (STOPS OVERLAPPING) */}
-      <div className="absolute top-20 md:hidden w-[220px] aspect-square rounded-full overflow-hidden border-[8px] border-white shadow-2xl z-0 opacity-40">
-        <img 
-          src="/me.jpg" 
-          alt="Basavaraj" 
-          className="w-full h-full object-cover"
-        />
-      </div>
+    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-transparent">
 
       {/* 🔮 ARCHITECTURAL SIDEBARS (HIDDEN ON MOBILE) */}
       <div className="hidden lg:flex absolute left-6 top-1/2 -translate-y-1/2 h-[60%] w-12 items-center justify-center pointer-events-none">
@@ -25,7 +16,7 @@ const Hero = () => {
           {[...Array(12)].map((_, i) => (
             <motion.div
               key={i}
-              animate={{ 
+              animate={{
                 height: ['10%', '80%', '30%', '100%', '10%'],
                 opacity: [0.1, 0.3, 0.1]
               }}
@@ -36,24 +27,24 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 mt-20 md:mt-0">
-        <motion.div 
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.div
           style={{ opacity }}
           className="flex flex-col items-center text-center"
         >
           <div className="relative">
-            <h2 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[50vw] md:text-[30vw] font-black text-black/[0.02] whitespace-nowrap leading-none select-none uppercase">
+            <h2 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[40vw] md:text-[20vw] font-black text-black/[0.02] whitespace-nowrap leading-none select-none uppercase">
               FULL_STACK
             </h2>
 
-            <motion.h1 
+            <motion.h1
               style={{ scale, rotate }}
-              className="text-[12vw] sm:text-[10vw] md:text-[6vw] font-black leading-none tracking-tighter text-primary uppercase relative z-10"
+              className="text-[15vw] sm:text-[12vw] md:text-[8vw] font-black leading-none tracking-tighter text-primary uppercase relative z-10"
             >
               Full Stack<br />Developer
             </motion.h1>
 
-            <p className="text-[14px] sm:text-[16px] md:text-[14px] font-bold tracking-[1.5em] md:tracking-[2em] uppercase text-primary pt-12 md:pt-24 md:ml-[2em]">
+            <p className="text-[10px] md:text-[12px] font-bold tracking-[1em] md:tracking-[1.5em] text-primary pt-10 md:pt-20 whitespace-nowrap">
               [ BASAVARAJ_HG ]
             </p>
           </div>
@@ -61,7 +52,7 @@ const Hero = () => {
       </div>
 
       {/* Scroll indicator */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2 }}

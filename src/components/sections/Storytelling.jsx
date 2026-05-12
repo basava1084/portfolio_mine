@@ -16,7 +16,7 @@ const Storytelling = () => {
           transition={{ duration: 1.5 }}
           className="space-y-6"
         >
-          <span className="text-[10px] font-mono tracking-[1.5em] text-white/50 uppercase">[ THE_NARRATIVE ]</span>
+          <span className="text-[10px] font-mono tracking-[1em] md:tracking-[1.5em] text-white/50 uppercase inline-block whitespace-nowrap">[ THE_NARRATIVE ]</span>
           <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-tight">
             "BEYOND THE CODE,<br />
             I FIND THE <span className="italic text-black/20 font-light">HUMAN RHYTHM</span>."

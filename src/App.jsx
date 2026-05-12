@@ -13,10 +13,11 @@ import Contact from './components/sections/Contact';
 function App() {
   const { scrollYProgress } = useScroll();
   
-  // Desktop-only transformations (Hidden on mobile via CSS)
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.3], [1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.3], [1, 1.2]);
-  const y = useTransform(scrollYProgress, [0, 0.3], [0, -100]);
+  // Secret Entrance: Hidden at top (0), Opens on scroll (0.1 -> 0.2), then becomes B&W watermark
+  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.2, 0.5], [0, 1, 0.15, 0.15]);
+  const grayscale = useTransform(scrollYProgress, [0, 0.2, 0.3], [0, 0, 100]); // Stays in color during reveal, then turns B&W
+  const scale = useTransform(scrollYProgress, [0, 0.1, 0.5], [0.8, 1, 1.5]); 
+  const zIndex = useTransform(scrollYProgress, [0, 0.15, 0.2], [50, 50, 5]);
 
   return (
     <div className="relative min-h-screen bg-white">
@@ -25,11 +26,16 @@ function App() {
       
       <Scene />
 
-      {/* 👤 THE ARCHITECT: ONLY VISIBLE ON DESKTOP (md and up) */}
-      <div className="hidden md:flex fixed inset-0 z-[5] pointer-events-none items-center justify-center">
+      {/* 👤 THE ARCHITECT: Transforms from Color Hero to B&W Background Watermark */}
+      <div className="fixed inset-0 pointer-events-none flex items-center justify-center px-4 overflow-hidden">
         <motion.div
-          style={{ opacity, scale, y }}
-          className="relative w-[450px] aspect-square rounded-full overflow-hidden border-[12px] border-white shadow-[0_30px_100px_rgba(0,0,0,0.1)] bg-white"
+          style={{ 
+            opacity, 
+            scale,
+            zIndex,
+            filter: useTransform(grayscale, (v) => `grayscale(${v}%)`)
+          }}
+          className="relative w-[280px] sm:w-[450px] md:w-[600px] aspect-square rounded-full overflow-hidden border-[12px] border-white/50 shadow-2xl bg-white"
         >
           <img 
             src="/me.jpg" 
@@ -41,6 +47,7 @@ function App() {
 
       <main className="relative z-10">
         <div id="home"><Hero /></div>
+        {/* Sections are now bg-transparent to allow the watermark to be visible */}
         <div id="about"><About /></div>
         <div id="skills"><Skills /></div>
         <div id="projects"><Projects /></div>
